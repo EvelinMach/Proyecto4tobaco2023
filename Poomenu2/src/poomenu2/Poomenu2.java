@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Poomenu2 {
 
-    static profesor misMaestros[] = new profesor[10];
+    static profesor misMaestros[] = new profesor[15];
     static int contador = 0;
 
     public static void main(String[] args) {
@@ -24,15 +24,36 @@ public class Poomenu2 {
                 System.out.println("-----------Los datos son---------------");
                 verTodos();
             } else if (op == 3) {
-                System.out.println("Programa finaliado");
+                System.out.println("----------buscar profesor-----------------");
+                System.out.println("ingrese nombre");
+                Scanner teclado = new Scanner(System.in);
+                String nombre = teclado.nextLine();
+                System.out.println(verProfesor(nombre));
             } else {
                 System.out.println("Opcion incorrecta");
             }
         }
     }
 
+    static public String verProfesor(String nombre) {
+        int posicion = -1;
+        for (int i = 0; i < 15; i++) {
+            if (misMaestros[i] != null) {
+                if (misMaestros[i].verNombre().equals(nombre)) {
+                    posicion = i;
+                    break;
+                }
+            }
+        }
+        if (posicion != -1) {
+            return "materia: " + misMaestros[posicion].verMateria();
+        } else {
+            return "Profesor no encontrado";
+        }
+    }
+
     static public void crearProfesor() {
-        if (contador >= 10) {
+        if (contador >= 15) {
             System.out.println("la memoria esta llena");
         } else {
             Scanner teclado = new Scanner(System.in);
@@ -44,7 +65,6 @@ public class Poomenu2 {
             misMaestros[contador] = new profesor(nombre, materia);
             System.out.println("Dato almacenado");
             contador++;
-
         }
     }
 
